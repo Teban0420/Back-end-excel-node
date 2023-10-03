@@ -1,0 +1,22 @@
+{
+  "name": "excel-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "author": "Esteban Giraldo",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "excel4node": "^1.8.2",
+    "express": "^4.18.2",
+    "sequelize": "^6.33.0",
+    "tedious": "^16.4.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
