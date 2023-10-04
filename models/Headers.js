@@ -1,38 +1,38 @@
 
 const headers = [
-    'KEY',
+    'KEY', // indice
     'Carrier',
     'Origin',
     'Destination',
     'Aircraft Type',
     'Flt Number',
-    'Time Zone',
-    'STD',
-    'STA',
-    'Duration',
-    'LAT',
-    'TOA',
-    'Capacity Unit',
-    'Remaining Capacity',
-    'Type',
-    'Currency Rates',
-    'Minimum',
-    'Weight Type',
-    'Weight Break',
-    'Rate',
-    'Weight Break 2',
-    'Rate 2',
-    'Weight Break 3',
-    'Rate 3',
-    'Weight Break  4',
-    'Rate 4',
-    'Weight Break 4',
-    'Rate 4',
-    'Currency Surcharges',
-    'Surcharge Fuel',
-    'Surcharge Security',
-    'Surcharges Others Type',
-    'Surcharges Others'
+    'Time Zone', // LT 
+    'STD', // standard dd/mm/yyyy hh:mm:ss
+    'STA', // standard dd/mm/yyyy hh:mm:ss
+    'Duration', // por ahora en blanco
+    'LAT',  // por ahora en blanco
+    'TOA', // por ahora en blanco
+    'Capacity Unit', // UnitsWt
+    'Remaining Capacity', // CargoCapWt
+    'Type',  // Standard
+    'Currency Rates', // USD
+    'Minimum',             // por ahora en blanco
+    'Weight Type', // por ahora en blanco
+    'Weight Break', // por ahora en blanco
+    'Rate', // por ahora en blanco
+    'Weight Break 2', // por ahora en blanco
+    'Rate 2', // por ahora en blanco
+    'Weight Break 3', // por ahora en blanco
+    'Rate 3', // por ahora en blanco
+    'Weight Break  4', // por ahora en blanco
+    'Rate 4', // por ahora en blanco
+    'Weight Break 4', // por ahora en blanco
+    'Rate 4', // por ahora en blanco
+    'Currency Surcharges', // por ahora en blanco
+    'Surcharge Fuel', // por ahora en blanco
+    'Surcharge Security', // por ahora en blanco
+    'Surcharges Others Typ', // por ahora en blancoe
+    'Surcharges Others'  // por ahora en blancoe
 ]
 
 module.exports = headers

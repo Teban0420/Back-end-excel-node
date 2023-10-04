@@ -26,7 +26,7 @@ exports.mostrarVuelo = async (req, res, next) => {
            )
         
         res.json(consulta)
-        crearExcel(headers)
+        crearExcel(headers, consulta)
         
 
     } catch (error) {
