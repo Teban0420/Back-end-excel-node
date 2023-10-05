@@ -31,8 +31,8 @@ const headers = [
     'Currency Surcharges', // por ahora en blanco
     'Surcharge Fuel', // por ahora en blanco
     'Surcharge Security', // por ahora en blanco
-    'Surcharges Others Typ', // por ahora en blancoe
-    'Surcharges Others'  // por ahora en blancoe
+    'Surcharges Others Typ', // por ahora en blanco
+    'Surcharges Others'  // por ahora en blanco
 ]
 
 module.exports = headers

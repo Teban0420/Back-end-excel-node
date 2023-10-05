@@ -1,14 +1,15 @@
 const db = require('../config/db.js')
 const dbo_AWB_Booking = require('../models/dbo_AWB_Booking.js')
+const dbo_CUS_Rates = require('../models/dbo_CUS_Rates.js')
 const headers = require('../models/Headers.js')
 const crearExcel = require('../helpers/Excel.js')
 
-exports.mostrarVuelos = async (req, res, next) => {
+exports.mostrarTarifas = async (req, res, next) => {
 
     try {
 
-        const vuelos = await dbo_AWB_Booking.findAll()        
-        res.json(vuelos)
+        const tarifas = await dbo_CUS_Rates.findAll()        
+        res.json(tarifas)
         
     } catch (error) {
         console.log(error)
