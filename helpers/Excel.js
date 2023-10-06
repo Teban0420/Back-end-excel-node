@@ -3,7 +3,7 @@ const wb = new xl.Workbook()
 const moment = require('moment')
 
 
-const crearExcel = (headers, datos) => {
+const crearExcel = (headers, datos, tarifas) => {
 
     const ws = wb.addWorksheet('Vuelos');
     const style = wb.createStyle({
@@ -26,10 +26,45 @@ const crearExcel = (headers, datos) => {
     let fila = 2
     let columna = 1
 
+    const TarifasAll = Object.values(tarifas) 
+
+    let tarifasWC = {
+      Minimun: '',
+      Rate: '',
+      RateQ: '',
+      Break2: '',
+      Rate2: '',
+      Break3: '',
+      Rate3: '',
+      RutaCompletaTarifa: ''
+    }
+    
+    TarifasAll.forEach( tarifa => {
+
+      const Rate = tarifa.RateQ.split('/')
+      const Break2 = Rate[0].split(':')
+      const Break3 = Rate[1].split(':')
+
+       tarifasWC.Minimun = tarifa.RateMin
+       tarifasWC.Rate = tarifa.Rate
+       tarifasWC.RateQ = tarifa.RateQ.split('/')
+       tarifasWC.Break2 = Break2[0]
+       tarifasWC.Rate2 = Break2[1]
+       tarifasWC.Break3 = Break3[0]
+       tarifasWC.Rate3 = Break3[1]
+       tarifasWC.RutaCompletaTarifa = tarifa.RouteID
+    
+    })
+
     info.forEach( (item, i) => {
 
       i += 1
       var string = i.toString()
+
+      const rutaCompletaVuelo = item.Origin.concat(item.Dest)
+
+      console.log (rutaCompletaVuelo == tarifasWC.RutaCompletaTarifa.trim())
+      // console.log( tarifasWC.RutaCompletaTarifa.trim().length)
       const staString = item.STA.toString()    
       const STA_moment = moment(item.STA)
       const STA_format = STA_moment.format("DD/MM/YYYY")
@@ -42,7 +77,7 @@ const crearExcel = (headers, datos) => {
       const STD_format = STD_moment.format("DD/MM/YYYY")
       const horaSTD = stdString.slice(16,24)
 
-      const STD_COMPLETA = STD_format.concat(' ').concat(horaSTD)
+      const STD_COMPLETA = STD_format.concat(' ').concat(horaSTD)      
       
       ws.cell(fila, columna)
         .string(string)
@@ -118,14 +153,14 @@ const crearExcel = (headers, datos) => {
 
       ws.cell(fila, columna)
       // .number(item.UnitsWt)
-      .string('null')
+      .string('')
       .style(style);
 
         columna ++
 
       ws.cell(fila, columna)
       // .number(item.CargoCapWt)
-      .string('null')
+      .string('')
       .style(style);
 
         columna ++
@@ -143,54 +178,109 @@ const crearExcel = (headers, datos) => {
         columna ++
         
       // aqui -----------------------
-      ws.cell(fila, columna)
-      .string('')
-      .style(style);
+      if(rutaCompletaVuelo == tarifasWC.RutaCompletaTarifa.trim()){
 
-        columna ++
+          ws.cell(fila, columna)
+          .string(tarifasWC.Minimun.toString())
+          .style(style);
+          
+          columna ++
+      }
+      else{
+
+          ws.cell(fila, columna)
+          .string('')
+          .style(style);
+          
+          columna ++
+      }
+
       
       ws.cell(fila, columna)
-      .string('')
+      .string('LB')
       .style(style);
 
+       columna ++
+       
+      ws.cell(fila, columna)
+      .string('0')
+      .style(style);
+
+      columna ++
+
+      if(rutaCompletaVuelo == tarifasWC.RutaCompletaTarifa.trim()){
+        
+        // RATE
+        ws.cell(fila, columna)
+        .string(tarifasWC.Rate.toString())
+        .style(style);
+  
+        columna ++       
+        
+        // BREAK2
+        ws.cell(fila, columna)
+        .string(tarifasWC.Break2.toString())
+        .style(style);
+        
+        columna ++
+        
+        //RATE 2
+        ws.cell(fila, columna)
+        .string(tarifasWC.Rate2.toString())
+        .style(style);
+        
         columna ++
 
-      ws.cell(fila, columna)
-      .string('')
-      .style(style);
+        // BREAK3
+        ws.cell(fila, columna)
+        .string(tarifasWC.Break3.toString())
+        .style(style);
+    
+        columna ++
+          // RATE3
+        ws.cell(fila, columna)
+        .string(tarifasWC.Rate3.toString())
+        .style(style);
+  
+        columna ++
+    }
+    else {
 
-      columna ++
+        ws.cell(fila, columna)
+        .string('')
+        .style(style);
+  
+        columna ++       
+        
+        // BREAK2
+        ws.cell(fila, columna)
+        .string('')
+        .style(style);
+        
+        columna ++
+        
+        //RATE 2
+        ws.cell(fila, columna)
+        .string('')
+        .style(style);
+        
+        columna ++
 
-      ws.cell(fila, columna)
-      .string('')
-      .style(style);
+        // BREAK3
+        ws.cell(fila, columna)
+        .string('')
+        .style(style);
+    
+        columna ++
+          // RATE3
+        ws.cell(fila, columna)
+        .string('')
+        .style(style);
+  
+        columna ++
+    }
 
-      columna ++
-
-      ws.cell(fila, columna)
-      .string('')
-      .style(style);
-
-      columna ++
-
-      ws.cell(fila, columna)
-      .string('')
-      .style(style);
-
-      columna ++
-
-      ws.cell(fila, columna)
-      .string('')
-      .style(style);
-
-      columna ++
-
-      ws.cell(fila, columna)
-      .string('')
-      .style(style);
-
-      columna ++
-
+/////--------------------
       ws.cell(fila, columna)
       .string('')
       .style(style);

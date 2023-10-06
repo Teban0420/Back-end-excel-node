@@ -5,8 +5,6 @@ const vuelosControler = require('../controllers/vuelosControler.js')
 module.exports = function(){
 
    router.get('/vuelos', vuelosControler.mostrarTarifas)
-//    router.get('/vuelos/:id', vuelosControler.mostrarVuelo)
-   router.get('/excel', vuelosControler.mostrarVuelo)
 
     return router
 }

@@ -6,32 +6,43 @@ const crearExcel = require('../helpers/Excel.js')
 
 exports.mostrarTarifas = async (req, res, next) => {
 
+    const consultas = []
+
+    consultas.push(db.query(`
+    SELECT * FROM [dbo].[vi_ac_WCargoFlights] where STD > '2023-09-30' and STA < '2023-10-15' and Origin = 'SFO'`
+    ))
+    consultas.push(dbo_CUS_Rates.findAll({where: {CustomerID: 'WCARGO'}}))
+
     try {
 
-        const tarifas = await dbo_CUS_Rates.findAll()        
+        const [ vuelos, tarifas] = await Promise.all(consultas)
         res.json(tarifas)
+        // res.json(consultas)
+    
+        crearExcel(headers, vuelos, tarifas)
         
     } catch (error) {
         console.log(error)
         next()
     }
+
 }
 
-exports.mostrarVuelo = async (req, res, next) => {
+// exports.mostrarVuelo = async (req, res, next) => {
 
     
-    try {
+//     try {
 
-        const consulta = await db.query(`
-                SELECT * FROM [dbo].[vi_ac_WCargoFlights] where STD > '2023-09-30' and STA < '2023-10-15' and Origin = 'SFO'`
-           )
+//         const consulta = await db.query(`
+//                 SELECT * FROM [dbo].[vi_ac_WCargoFlights] where STD > '2023-09-30' and STA < '2023-10-15' and Origin = 'SFO'`
+//            )
         
-        res.json(consulta)
-        crearExcel(headers, consulta)
+//         res.json(consulta)
+//         crearExcel(headers, consulta)
         
 
-    } catch (error) {
-        console.log(error)
-        next()
-    }
-}
+//     } catch (error) {
+//         console.log(error)
+//         next()
+//     }
+// }
