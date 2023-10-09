@@ -11,7 +11,15 @@ const crearExcel = (headers, datos, tarifas) => {
           color: '#170909',
           size: 12,
         },
-        numberFormat: '$#,##0.00; ($#,##0.00); -',
+        numberFormat: '#####',
+      });
+    
+      const style2 = wb.createStyle({
+        font: {
+          color: '#170909',
+          size: 12,
+        },
+        numberFormat: '0.##',
       });
 
     headers.forEach(header => {
@@ -62,9 +70,6 @@ const crearExcel = (headers, datos, tarifas) => {
       var string = i.toString()
 
       const rutaCompletaVuelo = item.Origin.concat(item.Dest)
-
-      console.log (rutaCompletaVuelo == tarifasWC.RutaCompletaTarifa.trim())
-      // console.log( tarifasWC.RutaCompletaTarifa.trim().length)
       const staString = item.STA.toString()    
       const STA_moment = moment(item.STA)
       const STA_format = STA_moment.format("DD/MM/YYYY")
@@ -181,7 +186,7 @@ const crearExcel = (headers, datos, tarifas) => {
       if(rutaCompletaVuelo == tarifasWC.RutaCompletaTarifa.trim()){
 
           ws.cell(fila, columna)
-          .string(tarifasWC.Minimun.toString())
+          .number(tarifasWC.Minimun)
           .style(style);
           
           columna ++
@@ -203,7 +208,7 @@ const crearExcel = (headers, datos, tarifas) => {
        columna ++
        
       ws.cell(fila, columna)
-      .string('0')
+      .number(0)
       .style(style);
 
       columna ++
@@ -212,35 +217,35 @@ const crearExcel = (headers, datos, tarifas) => {
         
         // RATE
         ws.cell(fila, columna)
-        .string(tarifasWC.Rate.toString())
+        .number(tarifasWC.Rate)
         .style(style);
   
         columna ++       
         
         // BREAK2
         ws.cell(fila, columna)
-        .string(tarifasWC.Break2.toString())
+        .number(parseInt(tarifasWC.Break2))
         .style(style);
         
         columna ++
         
         //RATE 2
         ws.cell(fila, columna)
-        .string(tarifasWC.Rate2.toString())
-        .style(style);
+        .number(Number(tarifasWC.Rate2))
+        .style(style2);
         
         columna ++
 
         // BREAK3
         ws.cell(fila, columna)
-        .string(tarifasWC.Break3.toString())
+        .number(parseInt(tarifasWC.Break3))
         .style(style);
     
         columna ++
           // RATE3
         ws.cell(fila, columna)
-        .string(tarifasWC.Rate3.toString())
-        .style(style);
+        .number(Number(tarifasWC.Rate3))
+        .style(style2);
   
         columna ++
     }
