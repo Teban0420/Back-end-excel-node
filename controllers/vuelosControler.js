@@ -9,7 +9,7 @@ exports.mostrarTarifas = async (req, res, next) => {
     const consultas = []
 
     consultas.push(db.query(`
-    SELECT * FROM [dbo].[vi_ac_WCargoFlights] where STD > '2023-09-30' and STA < '2023-10-15' and Origin = 'SFO'`
+        SELECT * FROM [dbo].[vi_ac_WCargoFlights] where STD > '2023-09-30' and STA < '2023-10-15' and Origin = 'SFO'`
     ))
     consultas.push(dbo_CUS_Rates.findAll({where: {CustomerID: 'WCARGO'}}))
 
@@ -17,11 +17,13 @@ exports.mostrarTarifas = async (req, res, next) => {
 
         const [ vuelos, tarifas] = await Promise.all(consultas)
         res.json(tarifas)
+        // console.log(tarifas[1])
         // res.json(consultas)
     
         crearExcel(headers, vuelos, tarifas)
         
-    } catch (error) {
+        
+    } catch (error) { 
         console.log(error)
         next()
     }
