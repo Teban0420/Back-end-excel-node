@@ -50,7 +50,7 @@ const CorsOptions = {
 
 // habilitar cors
 app.use(cors( CorsOptions ))
-// app.use(cors(  ))
+// app.use(cors( ))
 
 const host = process.env.HOST || '0.0.0.0'
 const port = process.env.PORT || 5000

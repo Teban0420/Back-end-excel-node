@@ -3,6 +3,8 @@ const dbo_AWB_Booking = require('../models/dbo_AWB_Booking.js')
 const dbo_CUS_Rates = require('../models/dbo_CUS_Rates.js')
 const headers = require('../models/Headers.js')
 const crearExcel = require('../helpers/Excel.js')
+const fs = require('fs')
+
 
 exports.mostrarTarifas = async (req, res, next) => {
 
@@ -16,12 +18,23 @@ exports.mostrarTarifas = async (req, res, next) => {
     try {
 
         const [ vuelos, tarifas] = await Promise.all(consultas)
-        res.json(tarifas)
-        // console.log(tarifas[1])
-        // res.json(consultas)
-    
-        crearExcel(headers, vuelos, tarifas)
         
+        crearExcel(headers, vuelos, tarifas)
+                 
+        setTimeout(() => {
+
+            res.sendFile('/Excel.xlsx', {root: '.'}, function (err) {
+            if (err) 
+            {
+                next(err);
+            } 
+            else 
+            {
+                console.log('enviado',);
+            }
+            });            
+            
+        }, 3000);
         
     } catch (error) { 
         console.log(error)

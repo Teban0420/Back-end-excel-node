@@ -60,7 +60,6 @@ const crearExcel = (headers, datos, tarifas) => {
     tarifasWC.Rate2 = Break2[1]
     tarifasWC.Break3 = Break3[0]
     tarifasWC.Rate3 = Break3[1]
-    // tarifasWC.RutaCompletaTarifa = tarifa.RouteID
     const nuevaRuta = tarifa.RouteID.split('-')
     const rutaString = nuevaRuta.toString()
     const sin_coma =  rutaString.replace(',','')
