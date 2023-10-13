@@ -29,22 +29,3 @@ exports.mostrarTarifas = async (req, res, next) => {
     }
 
 }
-
-// exports.mostrarVuelo = async (req, res, next) => {
-
-    
-//     try {
-
-//         const consulta = await db.query(`
-//                 SELECT * FROM [dbo].[vi_ac_WCargoFlights] where STD > '2023-09-30' and STA < '2023-10-15' and Origin = 'SFO'`
-//            )
-        
-//         res.json(consulta)
-//         crearExcel(headers, consulta)
-        
-
-//     } catch (error) {
-//         console.log(error)
-//         next()
-//     }
-// }
