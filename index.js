@@ -59,17 +59,3 @@ const port = process.env.PORT || 5000
 app.listen(port, host, () => {
     console.log('EL servidor funciona')
 })
-
- 
-
-
-
-
-
-
-    
-
-
-
-
- 
